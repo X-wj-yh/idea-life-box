@@ -1,0 +1,9 @@
+{
+  "name": "灵感生活盒",
+  "short_name": "灵感生活盒",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#fbfaff",
+  "theme_color": "#6d55c8",
+  "lang": "zh-CN"
+}
