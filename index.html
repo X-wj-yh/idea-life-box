@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#6d55c8">
+<meta name="description" content="灵感生活盒：给日常一点新鲜感。随机抽取生活灵感，收藏喜欢的点子，记录每一次小小尝试。">
+<title>灵感生活盒 · 给日常一点新鲜感</title>
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+:root{--ink:#292347;--muted:#77718f;--purple:#7258cf;--purple2:#a17be2;--lav:#f0ebff;--paper:#fbfaff;--line:#e8e3f2;--white:#fff;--shadow:0 18px 50px rgba(69,48,130,.11)}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 10% 0%,#f0eaff 0,transparent 34%),var(--paper);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;min-height:100vh}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.app{max-width:1120px;margin:auto;padding:28px 24px 36px}
+header{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:24px}
+.brand h1{font-size:clamp(27px,4vw,38px);letter-spacing:.02em;margin:0 0 6px;font-weight:850}
+.brand p{margin:0;color:var(--muted);font-size:15px}
+.pill{background:var(--lav);color:var(--purple);border:1px solid #e4dcff;border-radius:999px;padding:10px 15px;font-size:13px;font-weight:700;white-space:nowrap}
+.hero{position:relative;overflow:hidden;border-radius:26px;padding:34px 26px 25px;background:linear-gradient(115deg,#6252b5,#795bd0 53%,#a27ae0);color:white;box-shadow:var(--shadow);min-height:260px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.09);pointer-events:none}
+.hero:before{width:260px;height:260px;left:-135px;bottom:-150px}
+.hero:after{width:300px;height:300px;right:-150px;top:-175px}
+.eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#e5dcff;font-weight:800;position:relative}
+.idea{position:relative;font-size:clamp(22px,4vw,31px);line-height:1.55;font-weight:800;max-width:760px;margin:18px auto 10px;min-height:52px;display:grid;place-items:center}
+.idea.waiting{font-size:20px;font-weight:600;color:#eee9ff}
+.idea-meta{position:relative;color:#e7ddff;font-size:13px;min-height:20px}
+.actions{position:relative;display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:23px}
+.btn{border:0;border-radius:13px;padding:12px 19px;font-weight:750;transition:transform .15s,box-shadow .15s,background .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:white;color:#624db6;box-shadow:0 6px 18px rgba(38,23,92,.16)}
+.btn-ghost{background:rgba(255,255,255,.13);color:white;border:1px solid rgba(255,255,255,.35)}
+.btn-soft{background:var(--lav);color:var(--purple)}
+.btn-danger{background:#fff0f1;color:#b34b61}
+.btn:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #c9baff;outline-offset:2px}
+.toolbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:22px 2px}
+.toolbar label{font-weight:750}
+select,input{border:1px solid #ddd6eb;background:white;color:var(--ink);border-radius:11px;padding:11px 13px;min-height:43px}
+select{min-width:190px}
+.status{margin-left:auto;color:var(--muted);font-size:13px}
+.tabs{display:flex;gap:8px;overflow:auto;padding:0 0 10px;border-bottom:1px solid var(--line)}
+.tab{border:1px solid transparent;background:transparent;color:var(--muted);padding:10px 15px;border-radius:12px 12px 0 0;font-weight:750;white-space:nowrap}
+.tab.active{background:white;color:var(--purple);border-color:var(--line);border-bottom-color:white}
+.panel{background:white;border:1px solid var(--line);border-top:0;border-radius:0 0 18px 18px;padding:18px;min-height:255px;box-shadow:0 10px 30px rgba(58,43,102,.04)}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+.panel-head h2{font-size:17px;margin:0}
+.count{color:var(--muted);font-size:12px}
+.list{display:grid;gap:9px}
+.item{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid #eeeaf5;border-radius:12px;padding:12px 13px}
+.item-main{min-width:0}
+.item-title{font-weight:650;line-height:1.5;overflow-wrap:anywhere}
+.item-sub{font-size:12px;color:var(--muted);margin-top:3px}
+.item-actions{display:flex;gap:6px;flex-shrink:0}
+.icon-btn{border:1px solid var(--line);background:#fff;border-radius:9px;padding:7px 9px;color:var(--purple)}
+.empty{padding:40px 12px;text-align:center;color:#9992ad}
+.custom-form{display:grid;grid-template-columns:170px minmax(180px,1fr) auto;gap:9px;margin-bottom:15px}
+.custom-form input{width:100%}
+footer{margin-top:20px;color:#9992ad;font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;background:#292347;color:white;padding:11px 17px;border-radius:12px;box-shadow:var(--shadow);transition:.22s;z-index:10;pointer-events:none;max-width:calc(100vw - 30px);text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:650px){.app{padding:22px 14px 28px}header{align-items:flex-start}.pill{font-size:11px;padding:8px 10px}.hero{min-height:280px;padding:28px 17px 22px;border-radius:21px}.toolbar{align-items:stretch}.toolbar label{width:100%}.toolbar select{flex:1;min-width:0}.status{width:100%;margin-left:0}.panel{padding:12px;min-height:230px}.custom-form{grid-template-columns:1fr}.custom-form select,.custom-form input{width:100%}.item{align-items:flex-start}.item-actions{flex-direction:column}.btn{padding:11px 15px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="brand"><h1>灵感生活盒</h1><p>不必事事有计划，偶尔让灵感替你做决定。</p></div>
+    <div class="pill">✦ 每日一点新鲜感</div>
+  </header>
+
+  <main>
+    <section class="hero" aria-live="polite">
+      <div class="eyebrow">TODAY'S LITTLE IDEA</div>
+      <div id="idea" class="idea waiting">等待灵感降临</div>
+      <div id="ideaMeta" class="idea-meta">选一个分类，抽取今天的小惊喜</div>
+      <div class="actions">
+        <button id="drawBtn" class="btn btn-primary">✦ 抽取今日灵感</button>
+        <button id="favoriteBtn" class="btn btn-ghost">♡ 收藏这条</button>
+        <button id="shareBtn" class="btn btn-ghost">↗ 分享灵感</button>
+      </div>
+    </section>
+
+    <section class="toolbar">
+      <label for="category">灵感类型</label>
+      <select id="category">
+        <option>全部分类</option><option>学习成长</option><option>休息放松</option>
+        <option>运动健康</option><option>美食探索</option><option>生活整理</option><option>社交娱乐</option>
+      </select>
+      <div class="status" id="status">你的收藏和历史只保存在当前设备的浏览器中。</div>
+    </section>
+
+    <nav class="tabs" aria-label="内容分类">
+      <button class="tab active" data-tab="favorites">♡ 我的收藏</button>
+      <button class="tab" data-tab="history">◷ 抽取历史</button>
+      <button class="tab" data-tab="custom">＋ 自定义灵感</button>
+    </nav>
+    <section class="panel" id="panel"></section>
+  </main>
+  <footer><span>灵感生活盒 · 给日常一点新鲜感</span><span>数据保存在本设备，不会自动上传。</span></footer>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script>
+const defaults = {
+ "学习成长":["读 10 页一直想读的书","学会一个新的快捷键","整理今天学到的三个知识点","看一节感兴趣的公开课程","练习写一段小程序","学 5 个新单词","把一个复杂概念讲给自己听","给未来的自己写一段学习计划"],
+ "休息放松":["放下屏幕，听三首喜欢的歌","泡一杯热饮，安静坐十分钟","看看窗外，让眼睛休息一下","给自己安排一段不被打扰的休息时间","整理一张喜欢的照片作为壁纸","看一集轻松有趣的节目"],
+ "运动健康":["出门散步 15 分钟","做一组轻松的拉伸","活动肩颈，放松久坐的身体","到户外呼吸新鲜空气","跟着喜欢的音乐活动一下","给自己准备一杯水"],
+ "美食探索":["尝试做一道简单的新菜","给今天的饭菜摆个漂亮的盘","试试一种没吃过的水果","做一份简单的早餐","整理自己的常用食谱","寻找一家想尝试的小店"],
+ "生活整理":["整理电脑桌面上的文件","清理书桌上暂时用不到的物品","备份一份重要文件","整理手机相册中的照片","把明天要用的东西提前准备好","给常用文件夹重新命名"],
+ "社交娱乐":["给一位朋友发消息问候近况","分享一首最近喜欢的歌","和家人聊聊今天发生的趣事","玩一局喜欢的小游戏","找一部一直想看的电影","给朋友推荐一本书或一部作品"]
+};
+const KEY="idea-life-box-web-v1";
+const $=s=>document.querySelector(s);
+let state={custom:[],favorites:[],history:[],current:null,tab:"favorites"};
+function load(){try{const v=JSON.parse(localStorage.getItem(KEY)||"{}");state.custom=Array.isArray(v.custom)?v.custom:[];state.favorites=Array.isArray(v.favorites)?v.favorites:[];state.history=Array.isArray(v.history)?v.history:[]}catch(e){toast("本地数据读取失败，将使用空白数据。")}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify({custom:state.custom,favorites:state.favorites,history:state.history}))}catch(e){toast("浏览器存储空间不足，数据未能保存。")}}
+function toast(msg){const el=$("#toast");el.textContent=msg;el.classList.add("show");clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.classList.remove("show"),2300)}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function draw(){const cat=$("#category").value;let pool=[];Object.entries(defaults).forEach(([category,items])=>{if(cat==="全部分类"||cat===category)items.forEach(text=>pool.push({category,text}))});state.custom.forEach(x=>{if(cat==="全部分类"||cat===x.category)pool.push({category:x.category,text:x.text,custom:true})});if(!pool.length){toast("这个分类暂时没有灵感，试试添加一条自定义灵感。");return}let picked=pool[Math.floor(Math.random()*pool.length)];state.current=picked;$("#idea").classList.remove("waiting");$("#idea").textContent=picked.text;$("#ideaMeta").textContent="✦ "+picked.category+(picked.custom?" · 自定义灵感":"");state.history.unshift({...picked,time:new Date().toLocaleString("zh-CN",{month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit"})});state.history=state.history.slice(0,100);save();renderPanel();$("#status").textContent="灵感已抽取，给今天增加一点新鲜感吧。"}
+function favorite(){if(!state.current){toast("请先抽取一条灵感。");return}const exists=state.favorites.some(x=>x.category===state.current.category&&x.text===state.current.text);if(exists){toast("这条灵感已经收藏过啦。");return}state.favorites.unshift({...state.current,addedAt:Date.now()});save();renderPanel();toast("已加入我的收藏。")}
+async function share(){if(!state.current){toast("请先抽取一条灵感。");return}const text=`我今天抽到的灵感：${state.current.text}（${state.current.category}）——灵感生活盒`;try{if(navigator.share)await navigator.share({title:"今日灵感",text});else{await navigator.clipboard.writeText(text);toast("灵感内容已复制，可以发给朋友啦。")}}catch(e){if(e.name!=="AbortError")toast("分享暂不可用，你可以手动复制灵感内容。")}}
+function switchTab(tab){state.tab=tab;document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));renderPanel()}
+function renderPanel(){const panel=$("#panel");if(state.tab==="custom"){panel.innerHTML=`<div class="panel-head"><h2>添加你自己的灵感</h2><span class="count">${state.custom.length} 条自定义内容</span></div><form class="custom-form" id="customForm"><select id="customCategory" aria-label="选择分类">${Object.keys(defaults).map(x=>`<option>${x}</option>`).join("")}</select><input id="customText" maxlength="80" placeholder="例如：去公园拍几张照片" aria-label="灵感内容" required><button class="btn btn-primary" type="submit">添加灵感</button></form><div class="list" id="customList"></div>`;$("#customForm").addEventListener("submit",e=>{e.preventDefault();const category=$("#customCategory").value,text=$("#customText").value.trim();if(!text)return;if(state.custom.some(x=>x.category===category&&x.text===text)||defaults[category].includes(text)){toast("这条灵感已经存在。");return}state.custom.unshift({category,text});save();renderPanel();toast("自定义灵感添加成功！")});const list=$("#customList");if(!state.custom.length)list.innerHTML='<div class="empty">还没有自定义灵感，添加一条试试吧。</div>';else list.innerHTML=state.custom.map((x,i)=>`<div class="item"><div class="item-main"><div class="item-title">${escapeHtml(x.text)}</div><div class="item-sub">${escapeHtml(x.category)}</div></div><div class="item-actions"><button class="icon-btn" data-delete-custom="${i}">删除</button></div></div>`).join("");list.querySelectorAll("[data-delete-custom]").forEach(b=>b.addEventListener("click",()=>{state.custom.splice(Number(b.dataset.deleteCustom),1);save();renderPanel();toast("已删除自定义灵感。")}));return}
+const isFav=state.tab==="favorites",items=isFav?state.favorites:state.history;panel.innerHTML=`<div class="panel-head"><h2>${isFav?"我的收藏":"最近抽取"}</h2><span class="count">${items.length} 条记录</span></div><div class="list" id="itemsList"></div>${!isFav&&items.length?'<div style="text-align:right;margin-top:14px"><button class="btn btn-danger" id="clearHistory">清空历史</button></div>':""}`;const list=$("#itemsList");if(!items.length){list.innerHTML=`<div class="empty">${isFav?"还没有收藏内容，抽到喜欢的灵感后点击“收藏这条”即可保存。":"还没有抽取记录，先来抽取一条今日灵感吧。"}</div>`;return}list.innerHTML=items.map((x,i)=>`<div class="item"><div class="item-main"><div class="item-title">${escapeHtml(x.text)}</div><div class="item-sub">${escapeHtml(x.category)}${x.time?" · "+escapeHtml(x.time):""}</div></div>${isFav?`<div class="item-actions"><button class="icon-btn" data-remove-fav="${i}">取消收藏</button></div>`:""}</div>`).join("");list.querySelectorAll("[data-remove-fav]").forEach(b=>b.addEventListener("click",()=>{state.favorites.splice(Number(b.dataset.removeFav),1);save();renderPanel();toast("已取消收藏。")}));const clear=$("#clearHistory");if(clear)clear.addEventListener("click",()=>{if(confirm("确定清空所有抽取历史吗？")){state.history=[];save();renderPanel();toast("历史记录已清空。")}})}
+$("#drawBtn").addEventListener("click",draw);$("#favoriteBtn").addEventListener("click",favorite);$("#shareBtn").addEventListener("click",share);document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>switchTab(b.dataset.tab)));
+load();renderPanel();
+if("serviceWorker" in navigator && location.protocol.startsWith("http"))window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+</script>
+</body>
+</html>
